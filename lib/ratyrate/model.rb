@@ -63,7 +63,8 @@ module Ratyrate
     end
   end
 
-  def get_overall_avg
+  # Return overall average
+  def get_overall_average
     return overall_average.nil? ? 0 : overall_average
   end
 
@@ -91,7 +92,7 @@ module Ratyrate
   end
 
   # calculates the movie overall average rating for all users
-  def calculate_overall_average
+  def calculate_overall_avg
     rating = Rate.where(rateable: self).pluck('stars')
     (rating.reduce(:+).to_f / rating.size).round(1)
   end
