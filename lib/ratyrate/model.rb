@@ -68,7 +68,8 @@ module Ratyrate
     return overall_average.nil? ? 0 : overall_average
   end
 
-  def overall_avg(user)
+  # Original written by wazery
+  # def overall_average(user)
     # avg = OverallAverage.where(rateable_id: self.id)
     # #FIXME: Fix the bug when the movie has no ratings
     # unless avg.empty?
@@ -89,12 +90,32 @@ module Ratyrate
     #   end
     #   overall_avg
     # end
+  # end
+
+  # Update overall average for a rateable
+  def update_rateable_overall_average
+    # Search of existing or create if not exist
+    oa = OverallAverage.find_or_create_by(rateable: self)
+    oa.update_attributes(rateable_type: self.name,
+                          overall_averages: calculate_rateable_overall_average())
+  end
+
+  # TODO: Update average rating a rater give (probably have to create a new table)
+  def update_rater_average_rating
   end
 
   # calculates the movie overall average rating for all users
-  def calculate_overall_avg
+  def calculate_rateable_overall_average
     rating = Rate.where(rateable: self).pluck('stars')
-    (rating.reduce(:+).to_f / rating.size).round(1)
+    average = (rating.reduce(:+).to_f / rating.size).round(1)
+    # Detect and cater for condition when 0.0 / 0 (not rated)
+    return (average.is_a?(Float) && average.nan?) ? 0 : average
+  end
+
+  def calculate_rater_average_rating
+    rating = Rate.where(rater: self).pluck('stars')
+    average = (rating.reduce(:+).to_f / rating.size).round(1)
+    return (average.is_a?(Float) && average.nan?) ? 0 : average
   end
 
   def average(dimension=nil)
