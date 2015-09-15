@@ -15,6 +15,8 @@ module Ratyrate
       else
         update_rate_average(stars, dimension)
       end
+      # Execute update overall average
+      update_rateable_overall_average
     else
       update_current_rate(stars, user, dimension)
     end
@@ -95,7 +97,7 @@ module Ratyrate
   # Update overall average for a rateable
   def update_rateable_overall_average
     # Search of existing or create if not exist
-    oa = OverallAverage.find_or_create_by(rateable: self)
+    oa = OverallAverage.find_or_initialize_by(rateable: self)
     oa.update_attributes(rateable_type: self.name,
                           overall_averages: calculate_rateable_overall_average())
   end
