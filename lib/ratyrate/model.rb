@@ -67,7 +67,7 @@ module Ratyrate
 
   # Return overall average
   def get_overall_average
-    return overall_average.nil? ? 0 : overall_average
+    return overall_average.nil? ? 0 : overall_average.overall_avg.round(1)
   end
 
   # Original written by wazery
