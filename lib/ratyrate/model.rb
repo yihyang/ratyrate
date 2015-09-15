@@ -98,7 +98,7 @@ module Ratyrate
   def update_rateable_overall_average
     # Search of existing or create if not exist
     oa = OverallAverage.find_or_initialize_by(rateable: self)
-    oa.update_attributes(rateable_type: self.name,
+    oa.update_attributes(rateable_type: self.class.name,
                           overall_avg: calculate_rateable_overall_average())
   end
 
