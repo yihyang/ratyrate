@@ -63,6 +63,10 @@ module Ratyrate
     end
   end
 
+  def get_overall_avg
+    return overall_average.nil? ? 0 : overall_average
+  end
+
   def overall_avg(user)
     # avg = OverallAverage.where(rateable_id: self.id)
     # #FIXME: Fix the bug when the movie has no ratings
@@ -124,6 +128,8 @@ module Ratyrate
 
       has_one :rate_average_without_dimension, -> { where dimension: nil}, as: :cacheable,
               class_name: 'RatingCache', dependent: :destroy
+
+      has_one :overall_average, class_name: 'OverallAverage', foreign_key: 'rateable_id', dependent: :destroy
 
       dimensions.each do |dimension|
         has_many "#{dimension}_rates".to_sym, -> {where dimension: dimension.to_s},
