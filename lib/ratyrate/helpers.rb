@@ -1,6 +1,5 @@
 module Helpers
   def rating_for(rateable_obj, dimension=nil, options={})
-
     cached_average = rateable_obj.average dimension
     avg = cached_average ? cached_average.avg : 0
 
@@ -26,6 +25,7 @@ module Helpers
     targetFormat = options[:targetFormat] || '{score}'
     targetScore  = options[:targetScore]  || ''
     readOnly     = options.delete(:readonly){ false }
+    style        = options[:style]        || ''
 
     disable_after_rate = options[:disable_after_rate] && true
     disable_after_rate = true if disable_after_rate == nil
@@ -65,7 +65,9 @@ module Helpers
                   "data-target-text" => targetText,
                   "data-target-type" => targetType,
                   "data-target-format" => targetFormat,
-                  "data-target-score" => targetScore
+                  "data-target-score" => targetScore,
+                  "style" => style
+
     end
   end
 
@@ -105,6 +107,7 @@ module Helpers
     targetType   = options[:targetType]   || 'hint'
     targetFormat = options[:targetFormat] || '{score}'
     targetScore  = options[:targetScore]  || ''
+    style        = options[:style]        || ''
 
     disable_after_rate = options[:disable_after_rate] || false
 
@@ -136,7 +139,8 @@ module Helpers
                 "data-target" => target,
                 "data-target-text" => targetText,
                 "data-target-format" => targetFormat,
-                "data-target-score" => targetScore
+                "data-target-score" => targetScore,
+                "style" => style
   end
 
 end
