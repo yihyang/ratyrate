@@ -75,7 +75,6 @@ module Helpers
   # TODO: Optimize codes, remove unused attributes
   def overall_average_rating_for(rateable_obj, dimension=nil, options={})
     avg = rateable_obj.get_overall_average
-    puts "average:" + avg.to_s
 
     star         = options[:star]         || 5
     enable_half  = options[:enable_half]  || false
