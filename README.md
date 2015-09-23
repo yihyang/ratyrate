@@ -179,6 +179,10 @@ Speed : <%= rating_for @car, "speed", :cancel_on => "cancel-on2.png" %>
 ```erb
   Speed : <%= rating_for @car, "speed", :cancel_off => "cancel-off2.png" %>
 ```
+11- To make the star read only or only for viewing use the function *readonly* **(default is false)**
+```erb
+  Speed : <%= rating_for @car, "speed", :readonly => true %>
+```
 ### Other Helpers
 
 You can use the *rating_for_user* helper method to show the star rating for the user.
