@@ -8,3 +8,7 @@ ruby '2.2.2'
 
 # Specify your gem's dependencies in letsrate.gemspec
 gemspec
+
+group :development, :test do
+  gem 'rspec'
+end
