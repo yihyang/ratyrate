@@ -57,12 +57,10 @@ class RatyrateGenerator < ActiveRecord::Generators::Base
   def rails5?
     Rails.version.start_with? '5'
   end
+
   def migration_version
     if rails5?
       "[#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}]"
-    else
-      "[#{ActiveRecord::VERSION::MAJOR}.#{ActiveRecord::VERSION::MINOR}]"
-      
     end
   end
 
